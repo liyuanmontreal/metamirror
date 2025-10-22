@@ -56,3 +56,30 @@ python src/analyze_results.py
 
 ## Offline Note
 This project avoids external datasets (e.g., MNIST download). Everything is generated locally.
+
+
+## Experimental Results
+
+### Figure 1 — Meta Model Training Curve
+![](runs/figs/meta_training_curve.png)
+
+
+This plot shows the mean squared error (MSE) of the meta-model during training.  
+Initially, both training and validation errors are high, indicating the model has not yet captured the mapping between the base model’s internal state and its future performance.  
+After around 10 epochs, the MSE drops rapidly and stabilizes near zero, demonstrating that MetaMirror successfully learns the training dynamics of the base model.
+
+---
+
+### Figure 2 — Meta Predictions vs Ground Truth (Validation)
+![](runs/figs/meta_pred_vs_true.png)
+
+
+This figure compares the meta-model’s predicted next-step validation loss (orange) with the true value (blue).  
+The blue curve shows the base model’s smooth convergence from ~0.7 to ~0.1, while the orange curve tracks a similar trend, capturing the steady-state loss region.
+
+---
+**Summary:**  
+This experiment shows that MetaMirror can learn the internal dynamics of training from the recorded parameters and gradient statistics. This demonstrates that self-modeling in neural networks is possible — a model can be trained to understand, predict, and eventually improve another model, including itself.
+
+---
+
